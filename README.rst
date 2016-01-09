@@ -40,6 +40,7 @@ For a basic usage example, see:
 :Python: https://github.com/chintal/tendril/blob/master/tendril/utils/db.py#L201
 :Generated: http://tendril.chintal.in/doc/apidoc/tendril.utils.db/#tendril.utils.db.metadata
 
+
 License
 -------
 
