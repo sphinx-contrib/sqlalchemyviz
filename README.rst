@@ -14,7 +14,7 @@ be :
 
 .. code-block:: bash
 
-    sqlaviz --unique-relations --show-constraints tendril.utils.db:metadata -f out.dot
+    sqlaviz --unique-relations --show-constraints <pkg.module:metadata> -f out.dot
     ccomps -x out.dot | dot | gvpack -array3 | neato -Tpng -n2 -o out.png
 
 
