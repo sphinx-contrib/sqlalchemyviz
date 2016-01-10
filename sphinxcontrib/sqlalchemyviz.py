@@ -49,8 +49,9 @@ class SQLAlchemyViz(Image):
         output_path = os.path.join(output_folder, metadatapath + '.png')
         metadata = ':'.join(metadatapath.rsplit('.', 1))
         sqlaviz_cmd = ['sqlaviz',
+                       '-p neato',            # workaround newtrap bug.
                        '--unique-relations',
-                       '--show-constraints',
+                       #'--show-constraints', # workaround neato bug(?)
                        metadata,
                        '-f out.dot']
 
@@ -71,14 +72,21 @@ class SQLAlchemyViz(Image):
         render_sp.communicate()
         devnull.close()
 
-        os.remove('out.dot')
-        shutil.move('out.png', output_path)
+        try:
+            shutil.move('out.png', output_path)
+            os.remove('out.dot')
 
-        relpath = os.path.relpath(output_path, env.srcdir)
-
-        # I'm exhausted.
-        self.arguments.insert(0, '/' + relpath)
-
+            relpath = os.path.relpath(output_path, env.srcdir)
+            # I'm exhausted.
+            self.arguments.insert(0, '/' + relpath)
+        except IOError:
+            raise
+            error = self.state_machine.reporter.error(
+                "sqlaviz was unable to generate the output image!",
+                nodes.literal_block(self.block_text, self.block_text),
+                line=self.lineno
+            )
+            return [error]
         return Image.run(self)
 
 
