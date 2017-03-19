@@ -53,10 +53,12 @@ class SQLAlchemyViz(Image):
                        '--unique-relations',
                        #'--show-constraints', # workaround neato bug(?)
                        metadata,
+                       # workaround broken syntax bug post update
+                       '-o node_margin=\'"0,0"\'',
                        '-f out.dot']
 
         devnull = open(os.devnull)
-
+        print ' '.join(sqlaviz_cmd)
         sqlaviz_sp = subprocess.Popen(' '.join(sqlaviz_cmd),
                                       stdout=devnull,
                                       stderr=devnull,
@@ -80,7 +82,6 @@ class SQLAlchemyViz(Image):
             # I'm exhausted.
             self.arguments.insert(0, '/' + relpath)
         except IOError:
-            raise
             error = self.state_machine.reporter.error(
                 "sqlaviz was unable to generate the output image!",
                 nodes.literal_block(self.block_text, self.block_text),

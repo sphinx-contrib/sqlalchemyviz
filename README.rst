@@ -32,6 +32,16 @@ be :
     This change will hopefully be rolled back at some point, once the
     underlying bugs have been resolved.
 
+.. note::
+
+    Recent update(s) to SQLAlchemyViz / pydot creates a syntax error in the
+    generated .dot file. This is worked around by changing the sqlaviz command
+    in v0.3 to :
+
+    .. code-block:: bash
+
+        sqlaviz -p neato --unique-relations <pkg.module:metadata> -o node_margin='"0,0"' -f out.dot
+
 
 Installation & Usage
 --------------------

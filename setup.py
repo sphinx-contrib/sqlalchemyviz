@@ -17,7 +17,7 @@ requires = ['Sphinx>=0.6',
 
 setup(
     name='sphinxcontrib-sqlalchemyviz',
-    version='0.2',
+    version='0.3',
     url='https://github.com/chintal/sphinxcontrib-sqlalchemyviz',
     download_url='https://github.com/chintal/sphinxcontrib-sqlalchemyviz',
     license='BSD',
