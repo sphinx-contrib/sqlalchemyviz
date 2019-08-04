@@ -5,6 +5,8 @@
 # This Sphinx Extension is made available under the BSD 2-clause License. See
 # sphinxcontrib's LICENSE file for the full text.
 
+from __future__ import print_function
+
 import os
 import shutil
 import subprocess
@@ -53,16 +55,13 @@ class SQLAlchemyViz(Image):
                        '--unique-relations',
                        #'--show-constraints', # workaround neato bug(?)
                        metadata,
-                       # workaround broken syntax bug post update
-                       '-o node_margin=\'"0,0"\'',
                        '-f out.dot']
 
         devnull = open(os.devnull)
-        print ' '.join(sqlaviz_cmd)
-        sqlaviz_sp = subprocess.Popen(' '.join(sqlaviz_cmd),
+
+        sqlaviz_sp = subprocess.Popen(sqlaviz_cmd,
                                       stdout=devnull,
-                                      stderr=devnull,
-                                      shell=True)
+                                      stderr=devnull)
         sqlaviz_sp.communicate()
 
         render_cmd = 'ccomps -x out.dot | dot | gvpack -array3 ' \
