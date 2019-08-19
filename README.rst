@@ -52,12 +52,14 @@ This extension can be installed from pypi :
 
         pip install sphinxcontrib-sqlalchemyviz
 
+Add the ``sphinxcontrib.sqlalchemyviz`` to Sphinx's list of extensions on the ``conf.py``
+
 In the .rst file where the table should appear, insert the Sphinx
 directive provided by this module :
 
     .. code-block:: rest
 
-        .. .. sqlaviz::
+        .. sqlaviz::
             :metadataobject: full.importable.path.of.metadata
 
 For a basic usage example, see:
